@@ -5,6 +5,7 @@
 
         // 1° Deve realizar operações de adição
         // 2° Deve realizar operações de subtração
+        // 3º Deve realizar operações de multiplicação
 
         static void Main(string[] args)
         {
@@ -21,6 +22,7 @@
 
                 Console.WriteLine("Digite 1 para realizar operações de Adição");
                 Console.WriteLine("Digite 2 para realizar operações de Subtração");
+                Console.WriteLine("Digite 3 para realizar operações de Multiplicação");
 
                 Console.WriteLine("\nDigite S para sair\n");
                 Console.Write("Opção: ");
@@ -45,6 +47,8 @@
 
                     case "2": operacao = "Subtração"; break;
 
+                    case "3": operacao = "Multiplicação"; break;
+
                     default: 
                         break;
                 }
@@ -66,6 +70,8 @@
                     case "1": resultado = RealizarSoma(n1, n2); break;
 
                     case "2": resultado = RealizarSubtracao(n1, n2); break;
+
+                    case "3": resultado = RealizarMultiplicacao(n1, n2); break;
 
                     default:
                         break;
@@ -91,5 +97,7 @@
 
         static double RealizarSoma(double n1, double n2) => n1 + n2;
         static double RealizarSubtracao(double n1, double n2) => n1 - n2;
+
+        static double RealizarMultiplicacao(double n1, double n2) => n1 * n2;
     }
 }
