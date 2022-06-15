@@ -7,9 +7,13 @@
         // 2° Deve realizar operações de subtração
         // 3º Deve realizar operações de multiplicação
         // 4º Deve realizar operações de divisão
+        // 5° Deve validar as opções do menú
+        // 6° Deve mostrar o histórico de operações
 
 
-        static void Main(string[] args)
+        static readonly List<string> Historico = new();
+
+        static void Main()
         {
             string opcao;
 
@@ -26,6 +30,7 @@
                 Console.WriteLine("Digite 2 para realizar operações de Subtração");
                 Console.WriteLine("Digite 3 para realizar operações de Multiplicação");
                 Console.WriteLine("Digite 4 para realizar operações de Divisão");
+                Console.WriteLine("Digite 5 para visualizar o histórico de operações");
 
                 Console.WriteLine("\nDigite S para sair\n");
                 Console.Write("Opção: ");
@@ -35,10 +40,21 @@
                 if (opcao.Equals("s", StringComparison.OrdinalIgnoreCase))
                     break;
 
-                if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4")
+                if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5")
                 {
                     Console.WriteLine("Opção inválida.");
                     Console.ReadLine();
+                    continue;
+                }
+
+                if (opcao == "5")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Calculadora AP2022\n");
+
+                    Console.WriteLine("[Tela de Histórico]\n");
+
+                    VisualizarHistorico();
                     continue;
                 }
 
@@ -91,6 +107,8 @@
                         break;
                 }
 
+                AdicionarAoHistorico(n1, n2, operacao, resultado);
+
                 #endregion
 
                 #region MostrarResultado
@@ -116,5 +134,37 @@
         static double RealizarMultiplicacao(double n1, double n2) => n1 * n2;
 
         static double RealizarDivisao(double n1, double n2) => n1 / n2;
+
+        static void AdicionarAoHistorico(double n1, double n2, string operacao, double resultado)
+        {
+            string simbolo = "";
+
+            switch (operacao)
+            {
+                case "Adição": simbolo = "+"; break;
+                case "Subtração": simbolo = "-"; break;
+                case "Multiplicação": simbolo = "*"; break;
+                case "Divisão": simbolo = "/"; break;
+            }
+
+            string formato = $"{n1} {simbolo} {n2} = {resultado}";
+
+            Historico.Add(formato);
+        }
+
+        static void VisualizarHistorico()
+        {
+            if (Historico.Count == 0)
+            {
+                Console.WriteLine("Nenhum registro encontrado.");
+                Console.ReadLine();
+                return;
+            }
+
+            foreach (string item in Historico)
+                Console.WriteLine(item);
+
+            Console.ReadLine();
+        }
     }
 }
